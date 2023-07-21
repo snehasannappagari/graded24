@@ -1,0 +1,105 @@
+package Array;
+import java.util.*;
+
+class Node {
+    int values;
+    Node nxt;
+
+    Node(int val) {
+        this.values = values;
+    }
+}
+
+public class MergeSort{
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.println("Enter the elements for Linked1:");
+        String in1 = sc.nextLine();
+        Node list1 = createLList(in1);
+
+        System.out.println("Enter the elements for Linked2:");
+        String in2 = sc.nextLine();
+        Node list2 = createLList(in2);
+
+        sc.close();
+
+        Node mergeList = mergeList(list1, list2);
+        Node sortList = sortLList(mergeList);
+
+        System.out.println("Sorted Linked-List: ");
+        PrintLList(sortList);
+    }
+
+    public static Node createLList(String input) {
+        String[] elements = input.trim().split("\\s+");
+        Node dup = new Node(-1);
+        Node current = dup;
+
+        for (String element : elements) {
+            int value = Integer.parseInt(element);
+            current.nxt = new Node(value);
+            current = current.nxt;
+        }
+
+        return dup.nxt;
+    }
+
+    public static Node mergeList(Node list1, Node list2) {
+        Node dup = new Node(-1);
+        Node current = dup;
+
+        while (list1 != null && list2 != null) {
+            if (list1.values < list2.values) {
+                current.nxt = list1;
+                list1 = list1.nxt;
+            } else {
+                current.nxt = list2;
+                list2 = list2.nxt;
+            }
+            current = current.nxt;
+        }
+        if (list1 != null) {
+            current.nxt = list1;
+        } else {
+            current.nxt = list2;
+        }
+
+        return dup.nxt;
+    }
+
+    public static Node sortLList(Node head) {
+        if (head == null || head.nxt == null) {
+            return head;
+        }
+
+        Node sl = head;
+        Node fast = head;
+        Node prev = null;
+
+        while (fast != null && fast.nxt != null) {
+            prev = sl;
+            sl = sl.nxt;
+            fast = fast.nxt.nxt;
+        }
+
+        prev.nxt = null; 
+
+        Node left = sortLList(head);
+        Node right = sortLList(sl);
+
+        return mergeList(left, right);
+    }
+
+    public static void PrintLList(Node head) {
+        Node curr = head;
+        while (curr != null) {
+            System.out.print(curr.values);
+            if (curr.nxt != null) {
+                System.out.print("->");
+            }
+            curr = curr.nxt;
+        }
+        System.out.println(); 
+    }
+}
