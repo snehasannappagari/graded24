@@ -1,0 +1,33 @@
+package Array;
+import java.util.Scanner;
+
+public class MissingNumb {
+
+    public static void findMissNum(int[] arnum) {
+        int expval = arnum[0];
+        for (int j = 0; j < arnum.length; j++) {
+            while (expval < arnum[j]) {
+                System.out.print(expval + " ");
+                expval++;
+            }
+            expval++;
+        }
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Enter no.of elements in array: ");
+        int n = sc.nextInt();
+
+        int[] arnum = new int[n];
+        System.out.println("Enter the elements of array (consecutive):");
+        for (int i = 0; i < n; i++) {
+            arnum[i] = sc.nextInt();
+        }
+
+        System.out.println("missing no's are:");
+        findMissNum(arnum);
+    }
+}
+
