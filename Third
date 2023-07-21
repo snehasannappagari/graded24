@@ -1,0 +1,36 @@
+package Array;
+import java.util.*;
+public class SingSocksCount {
+  public static int countsingu(int[] anum) {
+        Map<Integer, Integer> sockCountMap = new HashMap<>();
+        for (int Id : anum) {
+            sockCountMap.put(Id, sockCountMap.getOrDefault(Id, 0) + 1);
+        }
+        int singlect = 0;
+        for (int ct : sockCountMap.values()) {
+            if (ct % 2 == 1) { 
+                singlect++;
+            }
+        }
+
+        return singlect;
+    }
+
+    public static void main(String[] args) {
+        Scanner sa = new Scanner(System.in);
+        try {
+            System.out.print("Enter the no.of elements in array: ");
+            int s = sa.nextInt();
+            int[] Num = new int[s];
+            System.out.println("Enter the elements of the array:");
+            for (int i = 0; i < s; i++) {
+                Num[i] = sa.nextInt();
+            }
+            int res = countsingu(Num);
+            System.out.println("Count of singular socks = " + res);
+        } catch (java.util.InputMismatchException e) {
+            System.out.println("Enter valid integers");
+        } finally {
+        }
+    }
+}
