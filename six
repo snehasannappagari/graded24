@@ -1,0 +1,74 @@
+package Array;
+import java.util.HashSet;
+import java.util.Scanner;
+
+class ListN {
+    int val;
+    ListN nex;
+
+    ListN(int val) {
+        this.val = val;
+    }
+}
+
+public class RemoveDupli {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter elements for LL1:");
+        String input = scanner.nextLine();
+        ListN head = createLinkedList(input);
+        scanner.close();
+
+        ListN resu = removeDuplicates(head);
+        System.out.println("LL after removing duplicates: ");
+        printLinkedList(resu);
+    }
+
+    public static ListN createLinkedList(String input) {
+        String[] elem = input.trim().split("\\s+");
+        ListN dupli = new ListN(-1);
+        ListN curt = dupli;
+
+        for (String eleme : elem) {
+            int value = Integer.parseInt(eleme);
+            curt.nex = new ListN(value);
+            curt = curt.nex;
+        }
+
+        return dupli.nex;
+    }
+
+    public static ListN removeDuplicates(ListN head) {
+        if (head == null) {
+            return null;
+        }
+
+        HashSet<Integer> set = new HashSet<>();
+        ListN curt = head;
+        ListN pre = null;
+
+        while (curt != null) {
+            if (set.contains(curt.val)) {
+                pre.nex = curt.nex; 
+            } else {
+                set.add(curt.val);
+                pre = curt;
+            }
+            curt = curt.nex;
+        }
+
+        return head;
+    }
+
+    public static void printLinkedList(ListN head) {
+        ListN cur = head;
+        while (cur != null) {
+            System.out.print(cur.val);
+            if (cur.nex != null) {
+                System.out.print("->");
+            }
+            cur = cur.nex;
+        }
+        System.out.println(); 
+    }
+}
