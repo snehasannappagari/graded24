@@ -1,0 +1,50 @@
+package Array;
+import java.util.*;	
+public class CumulativeArray {
+	
+	
+	    public static void main(String[] args) {
+	    	Scanner sc=new Scanner(System.in);
+	    	System.out.println("Enter the array elements:");
+	    	int N=sc.nextInt();
+	        int[] arrNum = new int[N];
+	        System.out.println("Enter " + N + " elements:");
+	        for (int i = 0; i < N; i++) {
+	            arrNum[i] = sc.nextInt();
+	        }
+	        try {
+	            CumulativeMul(arrNum);
+	            System.out.println("ArrNum = " + Arrays.toString(arrNum));
+	        } catch (Exception e) {
+	            System.out.println("Exception Occurred: " + e.getMessage());
+	        }
+	    }
+
+	    public static void CumulativeMul(int[] arrNum) throws Exception {
+	        if (arrNum == null || arrNum.length == 0) {
+	            throw new Exception("Array Can't be Null or Empty.");
+	        }
+
+	        int multi = 1;
+	        for (int a = 0; a < arrNum.length; a++) {
+	            if (arrNum[a] == 0) {
+	               multi = 0;
+	            }
+	            multi *= arrNum[a];
+	            arrNum[a] = multi;
+	        }
+	    }
+	}
+
+
+
+
+
+
+	   
+
+
+		
+
+		
+
